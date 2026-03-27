@@ -1,5 +1,5 @@
-# SwissAI TokEval
-This is the library used by the Apertus tokenization team for intrinsic evaluation during tokenizer development
+# TokEval
+This is the library for intrinsic evaluation during tokenizer development
 
 
 ## Quick Start
@@ -8,8 +8,9 @@ Get up and running in 30 seconds:
 
 ```bash
 # Clone and install
-git clone https://github.com/swiss-ai/tokenizer-intrinsic-evals.git
+git clone https://github.com/jujeongho0/tokenizer-intrinsic-evals.git
 cd tokenizer-intrinsic-evals
+git checkout dev/jeongho
 uv sync
 
 # Run demo analysis with built-in sample data
@@ -31,7 +32,7 @@ uv run tokenizer-analysis \
     --language-config configs/core_lang_config.json \
     --measurement-config configs/text_measurement_config_lines.json \
     --code-ast-config configs/starcoder_ast_config.json \
-    --verbose --run-grouped-analysis --per-language-plots --no-global-lines \
+    --verbose --per-language-plots --no-global-lines \
     --update-results-md --dataset flores_core --use-builtin-math-data
 
 # Push results to GitHub
@@ -40,11 +41,8 @@ uv run python scripts/update_remote.py
 
 Specify the path to your tokenizer file in the JSON given to `--tokenizer-config` (see [Configuration Files](#configuration-files)).
 
-> **Note:** The `--code-ast-config` flag points to `configs/starcoder_ast_config.json`, which expects a `starcoder/` directory in the repo root containing language-specific parquet files. If you're working on the Alps cluster, then creating this symlink will solve that problem.
+> **Note:** The `--code-ast-config` flag points to `configs/starcoder_ast_config.json`, which expects a `starcoder/` directory in the repo root containing language-specific parquet files.
 
-```bash
-ln -s /capstor/store/cscs/swissai/a139/datasets/tokenizer_training/tokenizer_training_dataset/starcoder starcoder
-```
 Without this data the AST metrics still run but fall back to small built-in synthetic samples. If you are working off-cluster or don't have access to the shared data, you can omit `--code-ast-config` entirely.
 
 ## Visualizing Tokenization
@@ -59,7 +57,7 @@ uv run tokenizer-visualize \
 # Show only specific tokenizers
 uv run tokenizer-visualize \
     --tokenizer-config configs/baseline_tokenizers.json \
-    --tokenizers "GPT-4o" "Qwen 3"
+    --tokenizers "GPT-4o" "Qwen-3.5"
 
 # Visualize all files in a directory
 # Files can contain multiple samples separated by a line with only "---".
