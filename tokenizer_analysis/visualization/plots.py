@@ -597,9 +597,18 @@ def _plot_per_language_combined_subplots(results: Dict[str, Any], save_dir: str,
     
     # Add shared legend
     if metrics_data:
-        axes[0].legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+        # axes[0].legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+        handles, labels = axes[0].get_legend_handles_labels()
+        fig.legend(
+            handles,
+            labels,
+            loc='center left',
+            bbox_to_anchor=(0.88, 0.5),
+            frameon=True
+        )
     
-    plt.tight_layout()
+    plt.tight_layout(rect=[0, 0, 0.86, 1])
+    # plt.tight_layout()
     save_plot(fig, os.path.join(save_dir, 'per_language_combined_subplots.svg'))
 
 
@@ -634,10 +643,21 @@ def _plot_per_language_grouped_bars(lang_data: Dict[str, Dict[str, float]],
     ax.set_title(title)
     ax.set_xticks(x_pos + width * (len(tokenizer_names) - 1) / 2)
     ax.set_xticklabels([format_language_labels(lang) for lang in languages], rotation=45, ha='right')
-    ax.legend()
+    # ax.legend()
     ax.grid(axis='y', alpha=0.3)
+
+    handles, labels = ax.get_legend_handles_labels()
+    fig.legend(
+        handles,
+        labels,
+        loc='center left',
+        bbox_to_anchor=(0.82, 0.5),   # figure 기준 오른쪽 바깥
+        frameon=True,
+        fontsize=12
+    )
     
-    plt.tight_layout()
+    plt.tight_layout(rect=[0, 0, 0.80, 1])
+    # plt.tight_layout()
     save_plot(fig, save_path)
 
 
