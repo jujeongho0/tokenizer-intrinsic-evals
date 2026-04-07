@@ -54,9 +54,5 @@
   "SuperTReXBPE-108k": {
     "class": "hf",
     "path": "/path/to/supertrexbpe_30gb_108k_extend_128k/n1/post_processed"
-  },
-  "SuperTReXBPE-118k": {
-    "class": "hf",
-    "path": "/path/to/supertrexbpe_30gb_118k_extend_128k/n1/post_processed"
   }
 }
